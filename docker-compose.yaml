@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+    master:
+        image: docker-node-application:latest
+        ports:
+            - '3000:3000'
+        networks:
+            - sample_network
+        env_file: .env.master
+        links:
+            - secondary
+    secondary:
+        image: docker-node-application:latest
+        ports:
+            - '3001:3000'
+        env_file: .env.secondary
+        networks:
+            - sample_network
+
+networks:
+    sample_network:
